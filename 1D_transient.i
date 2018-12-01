@@ -1,4 +1,3 @@
-inactive = 'Postprocessors'
 [Mesh]
   type = GeneratedMesh
   dim = 1
@@ -49,6 +48,7 @@ inactive = 'Postprocessors'
 []
 
 [BCs]
+  # For each equation, only two bcs are needed, if more then two bcs for each equation it will be over-specify. If nodalBC and integrateBC are applied at the same time,  nodalBC will be strongly enforced while integrateBC will be ignored.
   inactive = 'left_u'
   [C_R_right]
     type = DirichletBC
@@ -62,7 +62,14 @@ inactive = 'Postprocessors'
     boundary = 'right'
     value = 1
   []
-  [leftcoupled_C_R_Fluxin]
+  [left_u]
+    type = DirichletBC
+    variable = u
+    boundary = 'left'
+    value = 0
+  []
+  [C_R_left_coupled_Fluxin]
+    # C_R (primary var) taking the flux from C_O (coupled)
     type = CoupledEqualFluxBC
     variable = C_R
     boundary = 'left'
@@ -70,18 +77,13 @@ inactive = 'Postprocessors'
     D_O = D_O
     coupled_var = 'C_O'
   []
-  [left_theta_C_O]
+  [C_O_left_theta]
+    # C_O (primary var) will couple the value of C_R (coupled var)
     type = Theta
     variable = C_O
     boundary = 'left'
     coupled_var = 'C_R'
     Exp = Exp_func
-  []
-  [left_u]
-    type = DirichletBC
-    variable = u
-    boundary = 'left'
-    value = 0
   []
 []
 
@@ -118,7 +120,13 @@ inactive = 'Postprocessors'
 []
 
 [Outputs]
-  exodus = true
+  [console]
+    type = Console
+  []
+  [exodus]
+    type = Exodus
+    execute_on = 'timestep_end'
+  []
 []
 
 [Debug]
@@ -128,11 +136,12 @@ inactive = 'Postprocessors'
 [Functions]
   [Exp_func]
     type = ParsedFunction
-    value = 'exp(n*F*(E1-v*t-E0)/R/T)'
+    value = 'exp(n*F*(E1-v*t-E0)/R/T)' # 6.2.2 time dependent
     vars = 'n F E1 v E0 R T'
     vals = '1 96485 1.1 1 1 8.314 300'
   []
   [C_R_IC_funtion]
+    # Give C_R a small value to trigger the flux exchange
     type = ParsedFunction
     vars = 'a'
     value = 'a*x-a'
@@ -145,10 +154,12 @@ inactive = 'Postprocessors'
     type = NodalVariableValue
     nodeid = 0
     variable = C_O
+    outputs = 'exodus'
   []
   [C_R]
     type = NodalVariableValue
     nodeid = 0
     variable = C_R
+    outputs = 'exodus'
   []
 []

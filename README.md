@@ -6,3 +6,5 @@ C_O/C_R=exp(nF(E1-vt-E0)/RT)
 
 The problem is the convergence issue that at the beginning time step it is not easy to converge due to the large C_O/C_R
 Once it would be able to converge and as time goes by it is more smooth.
+
+Need to put in Jacobian and test.

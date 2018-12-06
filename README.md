@@ -7,7 +7,11 @@ C_O/C_R=exp(nF(E1-vt-E0)/RT)
 The problem is the convergence issue that at the beginning time step it is not easy to converge due to the large C_O/C_R
 Once it would be able to converge and as time goes by it is more smooth.
 
+<<<<<<< HEAD
 20181205 NOTE
 Use the scaling parameter in variable, set scaling = 1E5 for C_R, it is able to converge when E1=1.3!
 
 But Jacobian is still needed for improvment.
+=======
+Need to put in Jacobian and test.
+>>>>>>> 155be8e572a97679a52a8f3d93aa069836e5c001

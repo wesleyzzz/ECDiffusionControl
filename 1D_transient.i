@@ -1,3 +1,4 @@
+inactive = 'Postprocessors'
 [Mesh]
   type = GeneratedMesh
   dim = 1
@@ -18,6 +19,7 @@
   [C_R]
     order = FIRST
     family = LAGRANGE
+    scaling = 1E5
     [InitialCondition]
       type = FunctionIC
       function = C_R_IC_funtion
@@ -138,7 +140,7 @@
     type = ParsedFunction
     value = 'exp(n*F*(E1-v*t-E0)/R/T)' # 6.2.2 time dependent
     vars = 'n F E1 v E0 R T'
-    vals = '1 96485 1.1 1 1 8.314 300'
+    vals = '1 96485 1.3 1 1 8.314 300'
   []
   [C_R_IC_funtion]
     # Give C_R a small value to trigger the flux exchange
@@ -154,12 +156,10 @@
     type = NodalVariableValue
     nodeid = 0
     variable = C_O
-    outputs = 'exodus'
   []
   [C_R]
     type = NodalVariableValue
     nodeid = 0
     variable = C_R
-    outputs = 'exodus'
   []
 []

@@ -36,7 +36,16 @@ Real
 Theta::computeQpResidual()
 {
   return _u[_qp] / _coupled_var[_qp] - f();
-  //return std::log(_u[_qp] / _coupled_var[_qp]) - std::log(f());
+
+}
+
+//NodalBCs are applied directly at nodes so there is no interpolation done like what it is done in the interior of an element volume or an element face. Instead of the approximate solution being u_h = sum(uj * phij), the solution is just simply uj because this is at a node. So there is NO phij for NodalBCs. That is why the Jacobian for most of NodalBCs is just 1 instead of _phi. 
+
+Real
+Theta::computeQpJacobian()
+{
+  return 1. / _coupled_var[_qp];
+
 }
 
 Real

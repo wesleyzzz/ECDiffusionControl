@@ -1,4 +1,3 @@
-inactive = 'Postprocessors'
 [Mesh]
   type = GeneratedMesh
   dim = 1
@@ -51,7 +50,7 @@ inactive = 'Postprocessors'
 
 [BCs]
   # For each equation, only two bcs are needed, if more then two bcs for each equation it will be over-specify. If nodalBC and integrateBC are applied at the same time,  nodalBC will be strongly enforced while integrateBC will be ignored.
-  inactive = 'left_u'
+
   [C_R_right]
     type = DirichletBC
     variable = C_R
@@ -63,12 +62,6 @@ inactive = 'Postprocessors'
     variable = C_O
     boundary = 'right'
     value = 1
-  []
-  [left_u]
-    type = DirichletBC
-    variable = u
-    boundary = 'left'
-    value = 0
   []
   [C_R_left_coupled_Fluxin]
     # C_R (primary var) taking the flux from C_O (coupled)
@@ -114,7 +107,7 @@ inactive = 'Postprocessors'
   num_steps = 300
   dt = 0.01
   solve_type = PJFNK
-  end_time = 0.6
+  end_time = 0.4
   [TimeStepper]
     type = IterationAdaptiveDT
     dt = 1E-12
@@ -148,18 +141,5 @@ inactive = 'Postprocessors'
     vars = 'a'
     value = 'a*x-a'
     vals = '-1E-9'
-  []
-[]
-
-[Postprocessors]
-  [C_O]
-    type = NodalVariableValue
-    nodeid = 0
-    variable = C_O
-  []
-  [C_R]
-    type = NodalVariableValue
-    nodeid = 0
-    variable = C_R
   []
 []

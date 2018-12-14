@@ -23,11 +23,13 @@ public:
 
 protected:
   virtual Real computeQpResidual() override;
+  virtual Real computeQpOffDiagJacobian(unsigned int jvar) override;
 
 private:
 
   const VariableGradient & _grad_couple_var;
-
+  /// int label for coupled_var for Jac
+  unsigned int _coupled_var_jac;
  /**
    * Diffusivity.
  */ 

@@ -15,3 +15,7 @@ Use the scaling parameter in variable, set scaling = 1E5 for C_R, it is able to 
 
 Updated Jacobian. Simulated to 0.6s.
 
+20181218
+
+Updated piecewise E. Simulated to 1.2s (E decrease and increase back).
+

@@ -103,10 +103,10 @@
 [Executioner]
   type = Transient
   num_steps = 300
-  dt = 0.01
   solve_type = PJFNK
-  end_time = 0.6
-  dtmax = 1e-2
+  end_time = 1.2
+  dtmax = 0.5e-2
+  line_search = basic
   [TimeStepper]
     type = IterationAdaptiveDT
     dt = 1E-12
@@ -130,7 +130,7 @@
 [Functions]
   [Exp_func]
     type = ParsedFunction
-    value = 'exp(n*F*(E1-v*t-E0)/R/T)' # 6.2.2 time dependent
+    value = 'if(t<=0.6, exp(n*F*(E1-v*t-E0)/R/T), exp(n*F*(E1+v*t-E0-2*v*0.6)/R/T))' # 6.2.2 time dependent
     vars = 'n F E1 v E0 R T'
     vals = '1 96485 1.3 1 1 8.314 300'
   []

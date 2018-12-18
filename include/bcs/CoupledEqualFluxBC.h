@@ -34,7 +34,6 @@ private:
    * Diffusivity.
  */ 
   const MaterialProperty<Real> & _D_O;
-  const MaterialProperty<Real> & _D_R;
  
 };
 

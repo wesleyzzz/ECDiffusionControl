@@ -22,8 +22,7 @@ CoupledEqualFluxBC::CoupledEqualFluxBC(const InputParameters & parameters)
 
     _grad_couple_var(coupledGradient("coupled_var")),
     _coupled_var_jac(coupled("coupled_var")),
-    _D_O(getMaterialProperty<Real>("D_O")),
-    _D_R(getMaterialProperty<Real>("D_R"))
+    _D_O(getMaterialProperty<Real>("D_O"))
 
 {
 }
@@ -40,7 +39,7 @@ Real
 CoupledEqualFluxBC::computeQpOffDiagJacobian(unsigned int jvar)
 {
   if (jvar == _coupled_var_jac)
-    return _test[_i][_qp] *_grad_phi[_j][_qp] * _D_O[_qp]/_D_R[_qp] *_normals[_qp];
+    return _test[_i][_qp] *_grad_phi[_j][_qp] * _D_O[_qp]*_normals[_qp];
   else
     return 0.;
 }

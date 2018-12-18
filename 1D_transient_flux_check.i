@@ -50,7 +50,6 @@
 
 [BCs]
   # For each equation, only two bcs are needed, if more then two bcs for each equation it will be over-specify. If nodalBC and integrateBC are applied at the same time,  nodalBC will be strongly enforced while integrateBC will be ignored.
-  inactive = 'left_u'
   [C_R_right]
     type = DirichletBC
     variable = C_R
@@ -63,18 +62,11 @@
     boundary = 'right'
     value = 1
   []
-  [left_u]
-    type = DirichletBC
-    variable = u
-    boundary = 'left'
-    value = 0
-  []
   [C_R_left_coupled_Fluxin]
     # C_R (primary var) taking the flux from C_O (coupled)
     type = CoupledEqualFluxBC
     variable = C_R
     boundary = 'left'
-    D_R = D_R
     D_O = D_O
     coupled_var = 'C_O'
   []
@@ -92,12 +84,12 @@
   [Diffusivity_of_C_O]
     type = GenericConstantMaterial
     prop_names = 'D_O'
-    prop_values = '0.1'
+    prop_values = '0.01'
   []
   [Diffusivity_of_C_R]
     type = GenericConstantMaterial
     prop_names = 'D_R'
-    prop_values = '0.1'
+    prop_values = '0.01'
   []
 []
 

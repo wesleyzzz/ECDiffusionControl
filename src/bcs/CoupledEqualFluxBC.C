@@ -32,7 +32,7 @@ CoupledEqualFluxBC::CoupledEqualFluxBC(const InputParameters & parameters)
 Real
 CoupledEqualFluxBC::computeQpResidual()
 {
-    return  _test[_i][_qp] *_grad_couple_var[_qp] * _D_O[_qp]/_D_R[_qp] *_normals[_qp];
+    return  _test[_i][_qp] *_grad_couple_var[_qp] * _D_O[_qp] *_normals[_qp];
 }
 
 //This will improve convergence

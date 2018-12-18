@@ -1,4 +1,3 @@
-inactive = 'Postprocessors'
 [Mesh]
   type = GeneratedMesh
   dim = 1
@@ -93,12 +92,12 @@ inactive = 'Postprocessors'
   [Diffusivity_of_C_O]
     type = GenericConstantMaterial
     prop_names = 'D_O'
-    prop_values = '0.01'
+    prop_values = '0.1'
   []
   [Diffusivity_of_C_R]
     type = GenericConstantMaterial
     prop_names = 'D_R'
-    prop_values = '0.01'
+    prop_values = '0.1'
   []
 []
 
@@ -115,6 +114,7 @@ inactive = 'Postprocessors'
   dt = 0.01
   solve_type = PJFNK
   end_time = 0.6
+  dtmax = 1e-2
   [TimeStepper]
     type = IterationAdaptiveDT
     dt = 1E-12
@@ -161,5 +161,17 @@ inactive = 'Postprocessors'
     type = NodalVariableValue
     nodeid = 0
     variable = C_R
+  []
+  [Flux_C_O]
+    type = SideFluxIntegral
+    diffusivity = D_O
+    variable = 'C_O'
+    boundary = 'left'
+  []
+  [Flux_C_R]
+    type = SideFluxIntegral
+    diffusivity = D_R
+    variable = 'C_R'
+    boundary = 'left'
   []
 []

@@ -124,17 +124,20 @@
 []
 
 [Functions]
+  # #####parameter#####
+  # #####parameter#####
+  E1 = '1.3'
+  v = '1'
+  E0 = '1'
   [Exp_func]
     type = ParsedFunction
-    value = 'if(t<=0.6, exp(n*F*(E1-v*t-E0)/R/T), exp(n*F*(E1+v*t-E0-2*v*0.6)/R/T))' # 6.2.2 time dependent
-    vars = 'n F E1 v E0 R T'
-    vals = '1 96485 1.3 1 1 8.314 300'
+    value = 'if(t<=0.6, exp(n*F*(${E1}-${v}*t-${E0})/R/T), exp(n*F*(${E1}+${v}*t-${E0}-2*${v}*0.6)/R/T))' # 6.2.2 time dependent
+    vars = 'n F R T'
+    vals = '1 96485 8.314 300'
   []
   [E]
     type = ParsedFunction
-    value = 'if(t<=0.6, E1-v*t-E0, E1+v*t-E0-2*v*0.6)'
-    vars = 'E1 v E0'
-    vals = '1.3 1 1'
+    value = 'if(t<=0.6, ${E1}-${v}*t-${E0}, ${E1}+${v}*t-${E0}-2*${v}*0.6)'
   []
   [C_R_IC_funtion]
     # Give C_R a small value to trigger the flux exchange

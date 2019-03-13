@@ -28,8 +28,10 @@ protected:
 private:
 
   const VariableGradient & _grad_couple_var;
-  /// int label for coupled_var for Jac
+
+  /// int label for coupled_var for Jac, this will give the identity
   unsigned int _coupled_var_jac;
+
  /**
    * Diffusivity.
  */ 
